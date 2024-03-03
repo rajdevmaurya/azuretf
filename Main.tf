@@ -11,4 +11,5 @@ terraform {
     container_name       = "ccpterraformstatefile"
     key                  = "ccpsterraform.tfstate"
   }
+
 }
