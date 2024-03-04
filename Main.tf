@@ -1,6 +1,7 @@
 # ARM provider block -rekhu
 provider "azurerm" {
-  version = "~>2.0"
+  source  = "hashicorp/azurerm"
+  version = ">=2.99.0"
   features {}
 }
 # Terraform backend configuration block -precreated
