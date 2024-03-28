@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "funcdeploy" {
 
 # Create Azure Storage Account
 resource "azurerm_storage_account" "funcdeploy" {
-  name                     = "uniquestorageaccount1234"
+  name                     = "uniquestorageaccount12346"
   resource_group_name      = azurerm_resource_group.funcdeploy.name
   location                 = azurerm_resource_group.funcdeploy.location
   account_tier             = "Standard"
