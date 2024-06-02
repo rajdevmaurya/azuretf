@@ -5,4 +5,5 @@ module "app_service_prod" {
 	owner               = "RAjdev"
 	description         = "Linux webapp"
 	app_name            = "myrgroup01"
+	no_of_app_count     = 2
 }
