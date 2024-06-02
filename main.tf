@@ -1,6 +1,14 @@
 # ARM provider block -rekhu
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=2.99.0"
+    }
+  }
+}
+
 provider "azurerm" {
-  version = "~>2.0"
   features {}
 }
 # Terraform backend configuration block -precreated
