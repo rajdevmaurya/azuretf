@@ -23,3 +23,8 @@ variable "description" {
   type        = string
   description = "Provide a description of the resource"
 }
+variable "no_of_app_count" {
+  type        = number
+  default     = 2
+  description = "Provide a description of the resource"
+}
