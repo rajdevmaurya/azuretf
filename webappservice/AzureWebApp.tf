@@ -32,7 +32,7 @@ resource "azurerm_app_service_plan" "service-plan" {
 # Create the App Service
 resource "azurerm_app_service" "app-service" {
   count               = var.no_of_app_count
-  name                = "${var.app_name}-[count.index]"
+  name                = "${var.app_name}-${[count.index]}"
   location            = azurerm_resource_group.appservice-rg.location
   resource_group_name = azurerm_resource_group.appservice-rg.name
   app_service_plan_id = azurerm_app_service_plan.service-plan.id
