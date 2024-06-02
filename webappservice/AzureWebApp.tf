@@ -1,6 +1,6 @@
 # Create a Resource Group
 resource "azurerm_resource_group" "appservice-rg" {
-  name     = "${var.app_name}-${var.environment}_AppService-rg"
+  name     = "${var.app_name}-${var.environment}_rg"
   location = var.location
   tags = {
     description = "POCs Demo"
@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "appservice-rg" {
 
 # Create the App Service Plan
 resource "azurerm_app_service_plan" "service-plan" {
-  name                = "${var.app_name}-${var.environment}_AppService-plan"
+  name                = "${var.app_name}-${var.environment}_service-plan"
   location            = azurerm_resource_group.appservice-rg.location
   resource_group_name = azurerm_resource_group.appservice-rg.name
   kind                = "Linux"
