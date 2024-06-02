@@ -1,7 +1,7 @@
 # Create a Resource Group
 resource "azurerm_resource_group" "appservice-rg" {
-  name     = "myrgroup01"
-  location = "East US"
+  name     = "${var.app_name}-${var.environment}_AppService-rg"
+  location = var.location
   tags = {
     description = "POCs Demo"
     environment = "POC"
@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "appservice-rg" {
 
 # Create the App Service Plan
 resource "azurerm_app_service_plan" "service-plan" {
-  name                = "my-linux-service-plan-01"
+  name                = "${var.app_name}-${var.environment}_AppService-plan"
   location            = azurerm_resource_group.appservice-rg.location
   resource_group_name = azurerm_resource_group.appservice-rg.name
   kind                = "Linux"
@@ -24,14 +24,14 @@ resource "azurerm_app_service_plan" "service-plan" {
 
   tags = {
     description = "POCs Demo"
-    environment = "POC"
-    owner       = "CloudQuickPoCs"  
+    environment = var.environment
+    owner       = var.owner
   }
 }
 
 # Create the App Service
 resource "azurerm_app_service" "app-service" {
-  name                = "my-linux-app-service01"
+  name                = "${var.app_name}-${var.environment}"
   location            = azurerm_resource_group.appservice-rg.location
   resource_group_name = azurerm_resource_group.appservice-rg.name
   app_service_plan_id = azurerm_app_service_plan.service-plan.id
@@ -42,7 +42,7 @@ resource "azurerm_app_service" "app-service" {
 
   tags = {
     description = "POCs Demo"
-    environment = "POC"
-    owner       = "CloudQuickPoCs"  
+    environment = var.environment
+    owner       = var.owner 
   }
 }
