@@ -1,4 +1,4 @@
-module "app_service_prod" {
+module "vm_service_prod" {
 	source = "./nia_infra/"
 	location            = "East US"
 	environment         = "System"
