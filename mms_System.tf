@@ -4,7 +4,7 @@ module "vm_service_prod" {
 	environment         = "System"
 	owner               = "abcd"
 	os_type             = "Windows"
-	app_name            = "mms1432"
+	app_name            = "apm1432"
 	app_code            = "mms"
 	no_of_app_count     = 2
 }

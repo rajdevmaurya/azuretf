@@ -66,7 +66,8 @@ resource "azurerm_network_security_group" "myterraformnsg" {
 
 # Create network interface
 resource "azurerm_network_interface" "myterraformnic" {
-    name                      = "myNIC"
+    count                     = var.no_of_app_count
+    name                      = "myNIC-${count.index + 1}"
     location                  = var.location
     resource_group_name       = azurerm_resource_group.myterraformgroup.name
 
@@ -84,7 +85,8 @@ resource "azurerm_network_interface" "myterraformnic" {
 
 # Connect the security group to the network interface
 resource "azurerm_network_interface_security_group_association" "example" {
-    network_interface_id      = azurerm_network_interface.myterraformnic.id
+    for_each                  = azurerm_network_interface.myterraformnic
+    network_interface_id      = each.value.id
     network_security_group_id = azurerm_network_security_group.myterraformnsg.id
 }
 
@@ -110,22 +112,14 @@ resource "azurerm_storage_account" "mystorageaccount" {
         environment = var.environment
     }
 }
-resource "azurerm_availability_set" "avset" {
-  name                         = "avset"
-  location                     = azurerm_resource_group.myterraformgroup.location
-  resource_group_name          = azurerm_resource_group.myterraformgroup.name
-  platform_fault_domain_count  = 2
-  platform_update_domain_count = 2
-  managed                      = true
-}
+
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
     count                 = var.no_of_app_count
     name                  = "${var.app_name}-${count.index + 1}"
     location              = var.location
-	availability_set_id   = azurerm_availability_set.avset.id
     resource_group_name   = azurerm_resource_group.myterraformgroup.name
-    network_interface_ids = [azurerm_network_interface.myterraformnic.id]
+    network_interface_ids = [azurerm_network_interface.myterraformnic[count.index].id]
     size                  = "Standard_DS1_v2"
 
     os_disk {
@@ -135,10 +129,10 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     }
 
     source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts-gen2"
-    version   = "latest"
+        publisher = "Canonical"
+        offer     = "UbuntuServer"
+        sku       = "18.04-LTS"
+        version   = "latest"
     }
 
     computer_name  = "${var.app_name}-${count.index + 1}"
