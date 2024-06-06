@@ -5,7 +5,7 @@ data "azurerm_resource_group" "myterraformgroup" {
   name = var.resource_group_name
 }
 resource "azurerm_resource_group" "myterraformgroup" {
-    count    = data.azurerm_resource_group.myterraformgroup.id == "" ? 1 : 0
+    count    = length(data.azurerm_resource_group.myterraformgroup.id) == 0 ? 1 : 0
     name     = var.resource_group_name
     location = var.location
 
