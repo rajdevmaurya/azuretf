@@ -1,4 +1,9 @@
 ﻿# Create a resource group if it doesn't exist
+data "azurerm_resource_group" "existing_rg" {
+  count = var.create_rg ? 0 : 1  # Condition to use an existing resource group if not creating
+
+  name = "${var.app_code}-${var.environment}_rg"
+}
 resource "azurerm_resource_group" "myterraformgroup" {
   count = var.create_rg ? 1 : 0  # Condition to create or not create the resource group
 
