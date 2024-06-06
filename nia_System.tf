@@ -22,7 +22,7 @@ module "vm_service_prod" {
 	location            = "East US"
 	environment         = "System"
 	owner               = "abcd"
-	os_type             = "Linux"
+	os_type             = ""
 	resource_group_name  = "finance"
 	app_name            = "nodev-apm01"
 	app_code            = "nia"
