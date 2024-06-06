@@ -1,24 +1,12 @@
 ﻿# Create a resource group if it doesn't exist
-data "azurerm_resource_group" "existing_rg" {
-  count = var.create_rg ? 0 : 1  # Condition to use an existing resource group if not creating
-
-  name = "${var.app_code}-${var.environment}_rg"
-}
 resource "azurerm_resource_group" "myterraformgroup" {
-  count = var.create_rg ? 1 : 0  # Condition to create or not create the resource group
+    name     = "${var.app_code}-${var.environment}_rg"
+    location = var.location
 
-  name     = "${var.app_code}-${var.environment}-rg"
-  location = var.location
-
-  tags = {
-    environment = var.environment
-    owner       = var.owner
-  }
-}
-
-# Use the existing resource group if not creating a new one
-locals {
-  rg_name = var.create_rg ? azurerm_resource_group.myterraformgroup[0].name : data.azurerm_resource_group.existing_rg.name
+    tags = {
+        environment = var.environment
+		owner       = var.owner
+    }
 }
 
 # Create virtual network
@@ -26,7 +14,7 @@ resource "azurerm_virtual_network" "myterraformnetwork" {
     name                = "myVnet"
     address_space       = ["10.0.0.0/16"]
     location            = var.location
-    resource_group_name = local.rg_name  # Use the local variable for resource group name
+    resource_group_name = azurerm_resource_group.myterraformgroup.name
 
     tags = {
         environment = var.environment
@@ -36,9 +24,9 @@ resource "azurerm_virtual_network" "myterraformnetwork" {
 # Create subnet
 resource "azurerm_subnet" "myterraformsubnet" {
     name                 = "mySubnet"
-    resource_group_name  = local.rg_name  # Use the local variable for resource group name
+    resource_group_name  = azurerm_resource_group.myterraformgroup.name
     virtual_network_name = azurerm_virtual_network.myterraformnetwork.name
-    address_prefixes     = ["10.0.1.0/24"]
+    address_prefixes       = ["10.0.1.0/24"]
 }
 
 # Create public IPs
@@ -46,7 +34,7 @@ resource "azurerm_public_ip" "myterraformpublicip" {
     count                        = var.no_of_app_count
     name                         = "${var.app_name}-PublicIP-${count.index + 1}"
     location                     = var.location
-    resource_group_name          = local.rg_name  # Use the local variable for resource group name
+    resource_group_name          = azurerm_resource_group.myterraformgroup.name
     allocation_method            = "Dynamic"
 
     tags = {
@@ -58,7 +46,7 @@ resource "azurerm_public_ip" "myterraformpublicip" {
 resource "azurerm_network_security_group" "myterraformnsg" {
     name                = "myNetworkSecurityGroup"
     location            = var.location
-    resource_group_name = local.rg_name  # Use the local variable for resource group name
+    resource_group_name = azurerm_resource_group.myterraformgroup.name
 
     security_rule {
         name                       = "SSH"
@@ -82,7 +70,7 @@ resource "azurerm_network_interface" "myterraformnic" {
     count                     = var.no_of_app_count
     name                      = "${var.app_name}-nic-${count.index + 1}"
     location                  = var.location
-    resource_group_name       = local.rg_name  # Use the local variable for resource group name
+    resource_group_name       = azurerm_resource_group.myterraformgroup.name
 
     ip_configuration {
         name                          = "myNicConfiguration"
@@ -107,7 +95,7 @@ resource "azurerm_network_interface_security_group_association" "example" {
 resource "random_id" "randomId" {
     keepers = {
         # Generate a new ID only when a new resource group is defined
-        resource_group = local.rg_name  # Use the local variable for resource group name
+        resource_group = azurerm_resource_group.myterraformgroup.name
     }
 
     byte_length = 8
@@ -116,7 +104,7 @@ resource "random_id" "randomId" {
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "mystorageaccount" {
     name                        = "diag${random_id.randomId.hex}"
-    resource_group_name         = local.rg_name  # Use the local variable for resource group name
+    resource_group_name         = azurerm_resource_group.myterraformgroup.name
     location                    = var.location
     account_tier                = "Standard"
     account_replication_type    = "LRS"
@@ -131,7 +119,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     count                 = var.no_of_app_count
     name                  = "${var.app_name}-${count.index + 1}"
     location              = var.location
-    resource_group_name   = local.rg_name  # Use the local variable for resource group name
+    resource_group_name   = azurerm_resource_group.myterraformgroup.name
     network_interface_ids = [azurerm_network_interface.myterraformnic[count.index].id]
     size                  = "Standard_DS1_v2"
 

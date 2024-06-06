@@ -6,12 +6,6 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name  = "rg-cloudquickpocs"
-    storage_account_name = "ccpsazuretf0001"
-    container_name       = "ccpterraformstatefile"
-    key                  = "mms.tfstate"
-  }
 }
 
 provider "azurerm" {
@@ -23,7 +17,6 @@ module "vm_service_prod" {
 	environment         = "System"
 	owner               = "abcd"
 	os_type             = "Linux"
-	create_rg           = ""
 	app_name            = "mms1432"
 	app_code            = "mms"
 	no_of_app_count     = 1
