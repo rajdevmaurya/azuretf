@@ -35,5 +35,5 @@ variable "app_code" {
 }
 variable "resource_group_name" {
   type        = string
-  default = "finance"
+  default = ""
 }
