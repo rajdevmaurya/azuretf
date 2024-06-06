@@ -21,7 +21,7 @@ variable "owner" {
 
 variable "no_of_app_count" {
   type        = number
-  default     = 2
+  default     = 1
   description = "Provide a no_of_app_count of the resource"
 }
 variable "os_type" {
@@ -32,4 +32,8 @@ variable "os_type" {
 variable "app_code" {
   type        = string
   description = "This variable defines the application code used to build resources.  It must be unique on Azure."
+}
+variable "resource_group_name" {
+  type        = string
+  default = "finance"
 }

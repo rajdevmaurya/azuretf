@@ -1,6 +1,12 @@
 ﻿# Create a resource group if it doesn't exist
+
+# Check if resource group exists
+data "azurerm_resource_group" "myterraformgroup" {
+  name = var.resource_group_name
+}
 resource "azurerm_resource_group" "myterraformgroup" {
-    name     = "${var.app_code}-${var.environment}_rg"
+    count    = data.azurerm_resource_group.example.id == "" ? 1 : 0
+    name     = var.resource_group_name
     location = var.location
 
     tags = {

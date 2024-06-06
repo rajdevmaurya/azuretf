@@ -22,7 +22,7 @@ module "vm_service_prod" {
 	location            = "East US"
 	environment         = "System"
 	owner               = "abcd"
-	os_type             = "Linux"
+	os_type             = "Windows"
 	app_name            = "mms1432"
 	app_code            = "mms"
 	no_of_app_count     = 2
