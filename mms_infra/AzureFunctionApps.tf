@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "funcdeploy" {
   resource_group_name      = azurerm_resource_group.funcdeploy.name
   location                 = azurerm_resource_group.funcdeploy.location
   account_tier             = "Standard"
-  account_replication_type = "Standard_LRS"
+  account_replication_type = "LRS"
 }
 
 # Create Azure Storage Container
