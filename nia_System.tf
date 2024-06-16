@@ -12,12 +12,12 @@ provider "azurerm" {
   features {}
 }
 module "vm_service_prod" {
-	source = "./mms_infra/"
+	source = "./nia_infra/"
 	location            = "East US"
 	environment         = "System"
 	owner               = "abcd"
 	os_type             = "Linux"
-	app_name            = "mms1432"
-	app_code            = "mms"
+	app_name            = "apm1432"
+	app_code            = "nia"
 	no_of_app_count     = 1
 }
