@@ -23,7 +23,7 @@ module "virtual_network" {
   APPGW_SUBNET_ADDRESS_PREFIX = "10.0.2.0/24"
 
   LOCATION                    = "East US"
-  RESOURCE_GROUP_NAME         = "my-resource-group"
+  RESOURCE_GROUP_NAME         = "rg-devops"
 
   ACR_VNET_NAME               = "acr-vnet"
   ACR_SUBNET_NAME             = "acr-subnet"
@@ -39,7 +39,7 @@ module "virtual_network" {
 module "sql_dbserver" {
   source = "./modules/sql-dbserver"
   LOCATION            = "East US"
-  RESOURCE_GROUP_NAME = "my-resource-group"
+  RESOURCE_GROUP_NAME = "rg-devops"
   DBSERVER_NAME       = "my-db-server"
   DBUSERNAME          = "adminuser"
   DBPASSWORD          = "P@ssw0rd!"
@@ -50,7 +50,7 @@ module "sql_dbserver" {
 module "agent_vm" {
   source = "./modules/agent-vm"
   LOCATION                    = "East US"
-  RESOURCE_GROUP_NAME         = "my-resource-group"
+  RESOURCE_GROUP_NAME         = "rg-devops"
   AGENT_VM_NAME = "agent-vm"
   VM_SIZE             = "Standard_DS1_v2"
   ADMIN_USERNAME      = "azureuser"
