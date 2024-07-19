@@ -47,3 +47,12 @@ module "sql_dbserver" {
   COLLATION           = "SQL_Latin1_General_CP1_CI_AS"
 }
 
+module "agent_vm" {
+  source = "./modules/agent-vm"
+  LOCATION                    = "East US"
+  RESOURCE_GROUP_NAME         = "rg-devops"
+  AGENT_VM_NAME = "agent-vm"
+  VM_SIZE             = "Standard_DS1_v2"
+  ADMIN_USERNAME      = "azureuser"
+  ADMIN_PASSWORD      =  "P@ssw0rd!"
+}
