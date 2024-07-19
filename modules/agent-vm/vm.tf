@@ -106,8 +106,9 @@ output "ip_address" {
 ## Install Docker and Configure Self-Hosted Agent
 resource "null_resource" "install_docker" {
   provisioner "remote-exec" {
+    inline = [file("${path.module}/../agent-vm/script.sh")]
     //inline = ["${file("../agent-vm/script.sh")}"]
-    inline = ["${file("../script.sh")}"]
+    //inline = ["${file("../script.sh")}"]
     //inline = [file("${path.module}/path/to/inline_script.sh")]
     connection {
       type     = "ssh"
