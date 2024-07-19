@@ -60,8 +60,8 @@ module "application_gateway" {
   source = "./modules/application-gateway"
   APPGW_PUBLIC_IP_NAME = "my-appgw-public-ip"
   APP_GATEWAY_NAME     = "my-app-gateway"
-  VIRTUAL_NETWORK_NAME = module.virtual_network.AKS_VNET_NAME
-  RESOURCE_GROUP_NAME  = module.virtual_network.RESOURCE_GROUP_NAME
+  VIRTUAL_NETWORK_NAME = "aks-vnet"
+  RESOURCE_GROUP_NAME  = "rg-devops"
   LOCATION             = "East US"
 }
 
