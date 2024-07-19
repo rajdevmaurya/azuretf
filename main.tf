@@ -56,4 +56,6 @@ module "agent_vm" {
   VM_SIZE             = "Standard_DS1_v2"
   ADMIN_USERNAME      = "azureuser"
   ADMIN_PASSWORD      =  "P@ssw0rd!"
+  AGENT_VNET_ID               = module.virtual_network.agent_vnet_id
+  AGENT_SUBNET_ID             = module.virtual_network.agent_subnet_id
 }
