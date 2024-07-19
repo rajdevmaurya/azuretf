@@ -35,3 +35,24 @@ module "virtual_network" {
   AGENT_SUBNET_ADDRESS_PREFIX = "10.2.1.0/24"
   AGENT_ADDRESS_SPACE         = "10.2.0.0/16"
 }
+
+module "sql_dbserver" {
+  source = "./modules/sql-dbserver"
+  LOCATION                    = "East US"
+  RESOURCE_GROUP_NAME         = "my-resource-group"
+  DBSERVER_NAME       = "my-db-server"
+  DBUSERNAME          = "adminuser"
+  DBPASSWORD          = "P@ssw0rd!"
+  DB_NAME             = "mydatabase"
+  COLLATION           = "SQL_Latin1_General_CP1_CI_AS"
+}
+
+module "agent_vm" {
+  source = "./modules/agent-vm"
+  RESOURCE_GROUP_NAME = var.RESOURCE_GROUP_NAME
+  LOCATION                    = "East US"
+  RESOURCE_GROUP_NAME         = "my-resource-group"
+  VM_SIZE             = "Standard_DS1_v2"
+  ADMIN_USERNAME      = "azureuser"
+  ADMIN_PASSWORD      =  "P@ssw0rd!"
+}
