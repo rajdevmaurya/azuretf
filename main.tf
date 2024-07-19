@@ -38,6 +38,7 @@ module "virtual_network" {
 
 module "sql_dbserver" {
   source = "./modules/sql-dbserver"
+  depends_on = [module.virtual_network]
   LOCATION            = "East US"
   RESOURCE_GROUP_NAME = "rg-devops"
   DBSERVER_NAME       = "my-db-server"
@@ -49,6 +50,7 @@ module "sql_dbserver" {
 
 module "agent_vm" {
   source = "./modules/agent-vm"
+  depends_on = [module.virtual_network]
   LOCATION                    = "East US"
   RESOURCE_GROUP_NAME         = "rg-devops"
   AGENT_VM_NAME = "agent-vm"
