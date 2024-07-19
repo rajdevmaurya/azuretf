@@ -75,9 +75,9 @@ module "log_analytics" {
   # Add required variables
   LOCATION            = var.LOCATION
   RESOURCE_GROUP_NAME = var.RESOURCE_GROUP_NAME
-  WORKSPACE_NAME      = var.WORKSPACE_NAME
-  SKU                 = var.SKU
-  RETENTION_IN_DAYS   = var.RETENTION_IN_DAYS
+  WORKSPACE_NAME      = "logana-01"
+  SKU                 = "PerGB2018"
+  RETENTION_IN_DAYS   = 7
 }
 
 module "private_acr" {
