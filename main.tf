@@ -38,8 +38,8 @@ module "virtual_network" {
 
 module "sql_dbserver" {
   source = "./modules/sql-dbserver"
-  LOCATION                    = "East US"
-  RESOURCE_GROUP_NAME         = "my-resource-group"
+  LOCATION            = "East US"
+  RESOURCE_GROUP_NAME = "my-resource-group"
   DBSERVER_NAME       = "my-db-server"
   DBUSERNAME          = "adminuser"
   DBPASSWORD          = "P@ssw0rd!"
@@ -49,7 +49,6 @@ module "sql_dbserver" {
 
 module "agent_vm" {
   source = "./modules/agent-vm"
-  RESOURCE_GROUP_NAME = var.RESOURCE_GROUP_NAME
   LOCATION                    = "East US"
   RESOURCE_GROUP_NAME         = "my-resource-group"
   VM_SIZE             = "Standard_DS1_v2"
