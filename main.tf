@@ -82,8 +82,15 @@ module "private_acr" {
 
 module "private_aks" {
   source = "./modules/private-aks"
-  LOCATION                    = "East US"
-  RESOURCE_GROUP_NAME         = "my-resource-group"
-  DNS_PREFIX                  = "myaks"
+  RESOURCE_GROUP_NAME     = "my-resource-group"
+  LOCATION                = "East US"
+  PRIVATE_ACR_NAME        = "myacr"
+  ACR_SKU                 = "Basic"
+  ACR_SUBNET_NAME         = "acr-subnet"
+  DNS_PREFIX              = "mydns"
+  VIRTUAL_NETWORK_NAME_ACR = "acr-vnet"
+  VIRTUAL_NETWORK_NAME_AKS = "aks-vnet"
+  VIRTUAL_NETWORK_NAME_AGENT = "agent-vnet"
+  SERVICE_PRINCIPAL_DISPLAY_NAME = "acr-access"
   # Add required variables
 }
