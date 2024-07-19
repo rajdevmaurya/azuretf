@@ -76,6 +76,8 @@ module "private_acr" {
   # Add required variables
   LOCATION                    = "East US"
   RESOURCE_GROUP_NAME         = "my-resource-group"
+  PRIVATE_ACR_NAME            = "my-private-acr001"
+  ACR_SKU                     = "Basic"
 }
 
 module "private_aks" {
