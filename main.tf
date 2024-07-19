@@ -70,15 +70,6 @@ module "application_gateway" {
   APP_GATEWAY_NAME          = var.APP_GATEWAY_NAME
 }
 
-module "log_analytics" {
-  source = "./modules/log-analytics"
-  # Add required variables
-  LOCATION            = var.LOCATION
-  RESOURCE_GROUP_NAME = var.RESOURCE_GROUP_NAME
-  WORKSPACE_NAME      = "logana-01"
-  SKU                 = "PerGB2018"
-  RETENTION_IN_DAYS   = 7
-}
 
 module "private_acr" {
   source = "./modules/private-acr"
