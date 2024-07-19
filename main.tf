@@ -58,3 +58,10 @@ module "agent_vm" {
   AGENT_VNET_ID               = module.virtual_network.agent_vnet_id
   AGENT_SUBNET_ID             = module.virtual_network.agent_subnet_id
 }
+output "agent_vnet_id" {
+  value = azurerm_virtual_network.agent-vnet.id
+}
+
+output "agent_subnet_id" {
+  value = azurerm_subnet.agent-subnet.id
+}
