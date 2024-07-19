@@ -84,5 +84,6 @@ module "private_aks" {
   source = "./modules/private-aks"
   LOCATION                    = "East US"
   RESOURCE_GROUP_NAME         = "my-resource-group"
+  DNS_PREFIX                  = "myaks"
   # Add required variables
 }
