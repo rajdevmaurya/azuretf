@@ -36,32 +36,5 @@ module "virtual_network" {
   AGENT_ADDRESS_SPACE         = "10.2.0.0/16"
 }
 
-module "sql_dbserver" {
-  source = "./modules/sql-dbserver"
-  LOCATION            = "East US"
-  RESOURCE_GROUP_NAME = "rg-devops"
-  DBSERVER_NAME       = "my-db-server"
-  DBUSERNAME          = "adminuser"
-  DBPASSWORD          = "P@ssw0rd!"
-  DB_NAME             = "mydatabase"
-  COLLATION           = "SQL_Latin1_General_CP1_CI_AS"
-}
 
-module "agent_vm" {
-  source = "./modules/agent-vm"
-  LOCATION                    = "East US"
-  RESOURCE_GROUP_NAME         = "rg-devops"
-  AGENT_VM_NAME = "agent-vm"
-  VM_SIZE             = "Standard_DS1_v2"
-  ADMIN_USERNAME      = "azureuser"
-  ADMIN_PASSWORD      =  "P@ssw0rd!"
-}
-module "application_gateway" {
-  source = "./modules/application-gateway"
-  APPGW_PUBLIC_IP_NAME = "my-appgw-public-ip"
-  APP_GATEWAY_NAME     = "my-app-gateway"
-  VIRTUAL_NETWORK_NAME = "aks-vnet"
-  RESOURCE_GROUP_NAME  = "rg-devops"
-  LOCATION             = "East US"
-}
 
