@@ -74,9 +74,13 @@ module "application_gateway" {
 module "private_acr" {
   source = "./modules/private-acr"
   # Add required variables
+  LOCATION                    = "East US"
+  RESOURCE_GROUP_NAME         = "my-resource-group"
 }
 
 module "private_aks" {
   source = "./modules/private-aks"
+  LOCATION                    = "East US"
+  RESOURCE_GROUP_NAME         = "my-resource-group"
   # Add required variables
 }
