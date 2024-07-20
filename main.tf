@@ -79,7 +79,7 @@ module "private_aks" {
   DNS_PREFIX             = "myAKS"
   private_cluster_enabled = true
   automatic_channel_upgrade = "rapid"
-  sku_tier               = "Standard"
+  sku_tier               = "Paid"
   azure_policy_enabled   = true
   default_node_pool_name = "default"
   default_node_pool_vm_size = "Standard_DS2_v2"
