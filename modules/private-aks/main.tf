@@ -129,7 +129,7 @@ resource "azurerm_kubernetes_cluster" "akscluster" {
       key_data = var.SSH_PUBLIC_KEY
     }
   }
-
+/*
 identity {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.aks-access.id]
@@ -137,7 +137,7 @@ identity {
    ingress_application_gateway {
      gateway_id = data.azurerm_application_gateway.appgateway.id
    }
-   /*
+   
     azure_active_directory_role_based_access_control {
      managed            = true
      azure_rbac_enabled = true
