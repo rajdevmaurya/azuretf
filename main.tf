@@ -83,7 +83,6 @@ module "private_aks" {
   azure_policy_enabled           = true
   default_node_pool_name         = "default"
   default_node_pool_vm_size      = "Standard_DS2_v2"
-  default_node_pool_availability_zones = ["1", "2", "3"]
   default_node_pool_enable_auto_scaling = true
   default_node_pool_enable_host_encryption = true
   default_node_pool_enable_node_public_ip = false
