@@ -93,6 +93,7 @@ module "private_aks" {
   default_node_pool_node_count = 3
   default_node_pool_os_disk_type = "Managed"
   admin_username         = "azureuser"
+  SSH_PUBLIC_KEY         = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC"
   network_dns_service_ip = "10.0.0.10"
   network_plugin         = "azure"
   network_service_cidr   = "10.0.0.0/16"
