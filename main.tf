@@ -65,18 +65,5 @@ module "application_gateway" {
   LOCATION             = "East US"
 }
 
-module "log_analytics" {
-  source = "./modules/log-analytics"
-  # Add required variables
-}
 
-module "private_acr" {
-  source = "./modules/private-acr"
-  # Add required variables
-}
-
-module "private_aks" {
-  source = "./modules/private-aks"
-  # Add required variables
-}
 
