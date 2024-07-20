@@ -36,16 +36,6 @@ module "virtual_network" {
   AGENT_ADDRESS_SPACE         = "10.2.0.0/16"
 }
 
-module "sql_dbserver" {
-  source = "./modules/sql-dbserver"
-  LOCATION            = "East US"
-  RESOURCE_GROUP_NAME = "rg-devops"
-  DBSERVER_NAME       = "my-db-server"
-  DBUSERNAME          = "adminuser"
-  DBPASSWORD          = "P@ssw0rd!"
-  DB_NAME             = "mydatabase"
-  COLLATION           = "SQL_Latin1_General_CP1_CI_AS"
-}
 
 module "agent_vm" {
   source = "./modules/agent-vm"
@@ -65,5 +55,46 @@ module "application_gateway" {
   LOCATION             = "East US"
 }
 
+module "log_analytics" {
+  source = "./modules/log-analytics"
+  RESOURCE_GROUP_NAME  = "rg-devops"
+  LOCATION             = "East US"
+  # Add required variables
+}
 
+module "private_acr" {
+  source = "./modules/private-acr"
+  RESOURCE_GROUP_NAME  = "rg-devops"
+  LOCATION             = "East US"
+  PRIVATE_ACR_NAME      = "myPrivateACR"
+  ACR_SKU               = "Standard"
+}
+
+module "private_aks" {
+  source = "./modules/private-aks"
+  RESOURCE_GROUP_NAME  = "rg-devops"
+  LOCATION             = "East US"
+  NAME                   = "myAKSCluster"
+  kubernetes_version     = "1.23.5"
+  DNS_PREFIX             = "myAKS"
+  private_cluster_enabled = true
+  automatic_channel_upgrade = "rapid"
+  sku_tier               = "Standard"
+  azure_policy_enabled   = true
+  default_node_pool_name = "default"
+  default_node_pool_vm_size = "Standard_DS2_v2"
+  default_node_pool_availability_zones = ["1", "2", "3"]
+  default_node_pool_enable_auto_scaling = true
+  default_node_pool_enable_host_encryption = true
+  default_node_pool_enable_node_public_ip = false
+  default_node_pool_max_pods = 110
+  default_node_pool_max_count = 5
+  default_node_pool_min_count = 1
+  default_node_pool_node_count = 3
+  default_node_pool_os_disk_type = "Managed"
+  admin_username         = "azureuser"
+  network_dns_service_ip = "10.0.0.10"
+  network_plugin         = "azure"
+  network_service_cidr   = "10.0.0.0/16"
+}
 
