@@ -108,7 +108,6 @@ resource "azurerm_kubernetes_cluster" "akscluster" {
     name                   = var.default_node_pool_name
     vm_size                = var.default_node_pool_vm_size
     vnet_subnet_id         = data.azurerm_subnet.aks-subnet.id
-    zones                  = var.default_node_pool_availability_zones
     enable_auto_scaling    = var.default_node_pool_enable_auto_scaling
     enable_host_encryption = var.default_node_pool_enable_host_encryption
     enable_node_public_ip  = var.default_node_pool_enable_node_public_ip
