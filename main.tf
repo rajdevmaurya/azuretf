@@ -70,31 +70,4 @@ module "private_acr" {
   ACR_SKU               = "Standard"
 }
 
-module "private_aks" {
-  source = "./modules/private-aks"
-  RESOURCE_GROUP_NAME  = "rg-devops"
-  LOCATION             = "East US"
-  NAME                           = "myAKSCluster"
-  kubernetes_version             = "1.23.5"
-  DNS_PREFIX                     = "myAKS"
-  private_cluster_enabled        = true
-  automatic_channel_upgrade      = "rapid"
-  sku_tier                       = "Paid"  # Corrected value
-  azure_policy_enabled           = true
-  default_node_pool_name         = "default"
-  default_node_pool_vm_size      = "Standard_DS2_v2"
-  default_node_pool_enable_auto_scaling = true
-  default_node_pool_enable_host_encryption = true
-  default_node_pool_enable_node_public_ip = false
-  default_node_pool_max_pods     = 110
-  default_node_pool_max_count    = 5
-  default_node_pool_min_count    = 1
-  default_node_pool_node_count   = 3
-  default_node_pool_os_disk_type = "Managed"
-  admin_username                 = "azureuser"
-  SSH_PUBLIC_KEY                 = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC"
-  network_dns_service_ip         = "10.0.0.10"
-  network_plugin                 = "azure"
-  network_service_cidr           = "10.0.0.0/16"
-}
 
