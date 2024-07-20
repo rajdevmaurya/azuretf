@@ -62,12 +62,4 @@ module "log_analytics" {
   # Add required variables
 }
 
-module "private_acr" {
-  source = "./modules/private-acr"
-  RESOURCE_GROUP_NAME  = "rg-devops"
-  LOCATION             = "East US"
-  PRIVATE_ACR_NAME      = "myPrivateACR"
-  ACR_SKU               = "Standard"
-}
-
 
