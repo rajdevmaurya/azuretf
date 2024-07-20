@@ -55,9 +55,6 @@ module "agent_vm" {
   VM_SIZE             = "Standard_DS1_v2"
   ADMIN_USERNAME      = "azureuser"
   ADMIN_PASSWORD      =  "P@ssw0rd!"
-  depends_on = [
-    module.virtual_network
-  ]
 }
 module "application_gateway" {
   source = "./modules/application-gateway"
@@ -66,9 +63,6 @@ module "application_gateway" {
   VIRTUAL_NETWORK_NAME = "aks-vnet"
   RESOURCE_GROUP_NAME  = "rg-devops"
   LOCATION             = "East US"
-  depends_on = [
-    module.agent_vm
-  ]
 }
 
 module "log_analytics" {
