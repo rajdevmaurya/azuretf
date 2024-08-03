@@ -12,7 +12,3 @@ variable "client_secret" {
   type = string
   sensitive = true
 }
-variable "ssh_public_key" {
-  description = "The SSH public key to access the AKS nodes"
-  type        = string
-}
