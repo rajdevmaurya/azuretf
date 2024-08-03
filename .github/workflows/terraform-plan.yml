@@ -26,4 +26,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -var "location=${{ secrets.LOCATION }}" -var "resource_group_name=${{ secrets.RESOURCE_GROUP_NAME }}" -var "service_principal_name=${{ secrets.SERVICE_PRINCIPAL_NAME }}" -var "client_id=${{ secrets.ARM_CLIENT_ID }}" -var "client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var "ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
+        run: terraform plan -var "ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
