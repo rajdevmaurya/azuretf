@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RESOURCE_GROUP_NAME=backendrg
-STORAGE_ACCOUNT_NAME=backendtf101
+STORAGE_ACCOUNT_NAME=backendtf107
 CONTAINER_NAME=tfstate
 
 # Create resource group
