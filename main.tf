@@ -17,12 +17,3 @@ module "ServicePrincipal" {
     azurerm_resource_group.rg1
   ]
 }
-
-resource "azurerm_role_assignment" "rolespn" {
-  role_definition_name = "Contributor"
-  principal_id         = module.ServicePrincipal.service_principal_object_id
-
-  depends_on = [
-    module.ServicePrincipal
-  ]
-}
