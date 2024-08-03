@@ -1,4 +1,4 @@
-/*data "azurerm_resource_group" "rg-devops" {
+data "azurerm_resource_group" "rg-devops" {
   name = "rg-devops"
 }
  resource "azurerm_role_assignment" "Network_Contributor_subnet" {
@@ -18,4 +18,3 @@
    role_definition_name = "Contributor"
    principal_id         = azurerm_kubernetes_cluster.akscluster.ingress_application_gateway[0].ingress_application_gateway_identity[0].object_id
  }
-*/
